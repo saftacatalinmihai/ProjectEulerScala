@@ -510,28 +510,41 @@ object ProjectEuler {
       })
   }
 
+  def projectEuler22 = {
+    val names = scala.io.Source.fromFile("p022_names.txt").mkString.split(",").map(_.replace("\"", "")).sorted.toList
+    val alphabet = 'A' to 'Z'
+    val alphabetIndex = alphabet.zip(1 to alphabet.length).toMap
+    def alphabeticalValue(n: String) = {
+      n.toCharArray.map(alphabetIndex).sum
+    }
+    names.map{
+      name =>
+        alphabeticalValue(name) * (names.indexOf(name) + 1)
+    }.sum
+  }
   def main(args: Array[String]) {
 
-    assert(projectEuler1 == 233168)
-    assert(projectEuler2 == 4613732)
-    assert(projectEuler3 == 6857)
-    assert(projectEuler4 == 906609)
-    assert(projectEuler5 == 232792560)
-    assert(projectEuler6 == 25164150)
-    assert(projectEuler7 == 104743)
-    assert(projectEuler8 == 23514624000L)
-    assert(projectEuler9 == 31875000)
-    assert(projectEuler10 == 142913828922L)
-    assert(projectEuler11 == 70600674)
-    assert(projectEuler12 == (76576500,576))
-    assert(projectEuler13 == BigDecimal("5537376230390876637302048746832985971773659831892672"))
-    assert(projectEuler14 == 837799)
-    assert(projectEuler15 == 137846528820L)
-    assert(projectEuler16 == 1366)
-    assert(projectEuler17 == 21124)
-    assert(projectEuler18 == 1074)
-    assert(projectEuler67 == 7273)
-    assert(projectEuler19 == 171)
+//    assert(projectEuler1 == 233168)
+//    assert(projectEuler2 == 4613732)
+//    assert(projectEuler3 == 6857)
+//    assert(projectEuler4 == 906609)
+//    assert(projectEuler5 == 232792560)
+//    assert(projectEuler6 == 25164150)
+//    assert(projectEuler7 == 104743)
+//    assert(projectEuler8 == 23514624000L)
+//    assert(projectEuler9 == 31875000)
+//    assert(projectEuler10 == 142913828922L)
+//    assert(projectEuler11 == 70600674)
+//    assert(projectEuler12 == (76576500,576))
+//    assert(projectEuler13 == BigDecimal("5537376230390876637302048746832985971773659831892672"))
+//    assert(projectEuler14 == 837799)
+//    assert(projectEuler15 == 137846528820L)
+//    assert(projectEuler16 == 1366)
+//    assert(projectEuler17 == 21124)
+//    assert(projectEuler18 == 1074)
+//    assert(projectEuler67 == 7273)
+//    assert(projectEuler19 == 171)
+    assert(projectEuler22 == 871198282)
 
   }
 }
