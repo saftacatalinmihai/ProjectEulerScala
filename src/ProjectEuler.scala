@@ -528,6 +528,11 @@ object ProjectEuler {
     n.take(1000000).toList(999999).mkString
   }
 
+  def projectEuler25 = {
+    lazy val fibs: Stream[(BigInt, Int)] = (BigInt(1),1) #:: (BigInt(1),2) #:: (fibs zip fibs.tail).map{ t => (t._1._1 + t._2._1, t._2._2 + 1) }
+    fibs.find(_._1.toString.length == 1000).get._2
+  }
+
   def main(args: Array[String]) {
 
 //    assert(projectEuler1 == 233168)
@@ -551,7 +556,9 @@ object ProjectEuler {
 //    assert(projectEuler67 == 7273)
 //    assert(projectEuler19 == 171)
 //    assert(projectEuler22 == 871198282)
-    assert(projectEuler24 == "2783915460")
+//    assert(projectEuler24 == "2783915460")
+
+      assert(projectEuler25 == 4782)
 
   }
 }
