@@ -522,6 +522,12 @@ object ProjectEuler {
         alphabeticalValue(name) * (names.indexOf(name) + 1)
     }.sum
   }
+
+  def projectEuler24 = {
+    val n = List("0", "1", "2", "3", "4", "5", "6", "7", "8", "9").permutations
+    n.take(1000000).toList(999999).mkString
+  }
+
   def main(args: Array[String]) {
 
 //    assert(projectEuler1 == 233168)
@@ -544,7 +550,8 @@ object ProjectEuler {
 //    assert(projectEuler18 == 1074)
 //    assert(projectEuler67 == 7273)
 //    assert(projectEuler19 == 171)
-    assert(projectEuler22 == 871198282)
+//    assert(projectEuler22 == 871198282)
+    assert(projectEuler24 == "2783915460")
 
   }
 }
