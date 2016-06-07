@@ -533,6 +533,22 @@ object ProjectEuler {
     fibs.find(_._1.toString.length == 1000).get._2
   }
 
+  def projectEuler26 = {
+    def div(n: Int, s: Int = 10, seq: List[(Int, Int)] = List()): List[Int] = {
+      if (s % n == 0) List()
+      else {
+        val nn = s / n
+        val ns  = 10 * (s - ( nn * n))
+        if (seq.map(_._2).contains(ns)){
+          seq.map(_._1).reverse
+        } else
+          div(n, ns, (nn, ns) :: seq )
+      }
+    }
+
+    (2 to 1000).maxBy(div(_).length)
+  }
+
   def main(args: Array[String]) {
 
 //    assert(projectEuler1 == 233168)
@@ -557,8 +573,7 @@ object ProjectEuler {
 //    assert(projectEuler19 == 171)
 //    assert(projectEuler22 == 871198282)
 //    assert(projectEuler24 == "2783915460")
-
-      assert(projectEuler25 == 4782)
-
+//    assert(projectEuler25 == 4782)
+//    assert(projectEuler26 == 983)
   }
 }
