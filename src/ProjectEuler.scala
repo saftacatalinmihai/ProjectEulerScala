@@ -547,11 +547,12 @@ object ProjectEuler {
 
   def projectEuler50 = {
 
-    def isPrime(n: Int): Boolean = (2 until n) forall (n % _ != 0)
+    def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
+
     Stream.from(21)
-      .map(idx =>
+      .map(width =>
         primes
-          .sliding(idx)
+          .sliding(width)
           .map(s => (s.sum, s))
           .takeWhile(_._1 < 1000000)
           .toList)
@@ -588,6 +589,8 @@ object ProjectEuler {
 //    assert(projectEuler24 == "2783915460")
 //    assert(projectEuler25 == 4782)
 //    assert(projectEuler26 == 983)
-    assert(projectEuler50 == 997651)
+    time {
+      assert(projectEuler50 == 997651)
+    }
   }
 }
