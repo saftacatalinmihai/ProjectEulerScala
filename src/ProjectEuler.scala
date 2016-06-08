@@ -545,6 +545,23 @@ object ProjectEuler {
     (2 to 1000).maxBy(div(_).length)
   }
 
+  def projectEuler50 = {
+
+    def isPrime(n: Int): Boolean = (2 until n) forall (n % _ != 0)
+    Stream.from(21)
+      .map(idx =>
+        primes
+          .sliding(idx)
+          .map(s => (s.sum, s))
+          .takeWhile(_._1 < 1000000)
+          .toList)
+      .takeWhile(_.nonEmpty)
+      .flatten
+      .filter(ps => isPrime(ps._1))
+      .maxBy(_._2.length)
+      ._1
+  }
+
   def main(args: Array[String]) {
 
 //    assert(projectEuler1 == 233168)
@@ -571,5 +588,6 @@ object ProjectEuler {
 //    assert(projectEuler24 == "2783915460")
 //    assert(projectEuler25 == 4782)
 //    assert(projectEuler26 == 983)
+    assert(projectEuler50 == 997651)
   }
 }
