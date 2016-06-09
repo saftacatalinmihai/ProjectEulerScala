@@ -1,8 +1,13 @@
-lazy val primes: Stream[Int] = 2 #:: 3 #:: primes.map(a => {
-  Stream.from(a + 2)
-    .find(b => primes.takeWhile(c => c * c <= b).forall(b % _ != 0)).get
-})
+def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
+val l = for {
+  a <- -80 to 1
+  b <- 1 to 1603
+} yield {
+  Stream.from(0).map(n => (a, b, n * n + a * n + b)).filter(_._3 > 1).takeWhile(t => isPrime(t._3))
+}
+val (a, b, _) = l.view
+  .filter(_.nonEmpty)
+  .maxBy(_.length)
+  .head
 
-//val p1 = primes.head
-//p1 #:: primes.tail.toIndexedSeq.filter()
-primes.distinct.take(10).toList
+a * b

@@ -431,15 +431,6 @@ object ProjectEuler {
     maxPathInTriangle(triangle.toList)
   }
 
-  def projectEuler67 = {
-
-    val filename = "p067_triangle.txt"
-    val triangle = for (line <- Source.fromFile(filename).getLines()) yield {
-      line.split(" ").map(_.toInt).toList
-    }
-    maxPathInTriangle(triangle.toList)
-  }
-
   def projectEuler19 = {
     val monthToString: Map[Int, String] = Map(
       1 -> "January",
@@ -545,6 +536,26 @@ object ProjectEuler {
     (2 to 1000).maxBy(div(_).length)
   }
 
+  def projectEuler27 = {
+    def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
+
+    val consecutivePrimes = for {
+      a <- -999 to 1000
+      b <- primes.takeWhile(_<1000)
+    } yield {
+      Stream.from(1)
+        .map(n => (a, b, n * (a + n) + b))
+        .filter(_._3 > 1)
+        .takeWhile(t => isPrime(t._3))
+    }
+
+    val (a, b, _) = consecutivePrimes
+      .maxBy(_.length)
+      .head
+
+    a * b
+  }
+
   def projectEuler50 = {
 
     def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
@@ -561,6 +572,15 @@ object ProjectEuler {
       .filter(ps => isPrime(ps._1))
       .maxBy(_._2.length)
       ._1
+  }
+
+  def projectEuler67 = {
+
+    val filename = "p067_triangle.txt"
+    val triangle = for (line <- Source.fromFile(filename).getLines()) yield {
+      line.split(" ").map(_.toInt).toList
+    }
+    maxPathInTriangle(triangle.toList)
   }
 
   def main(args: Array[String]) {
@@ -589,8 +609,10 @@ object ProjectEuler {
 //    assert(projectEuler24 == "2783915460")
 //    assert(projectEuler25 == 4782)
 //    assert(projectEuler26 == 983)
+//    assert(projectEuler50 == 997651)
     time {
-      assert(projectEuler50 == 997651)
+      assert(projectEuler27 == -59231)
     }
+
   }
 }
