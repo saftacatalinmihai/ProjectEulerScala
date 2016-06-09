@@ -566,6 +566,15 @@ object ProjectEuler {
     1 + seq.take((1001 - 1) / 2).map(_._2.sum).sum
   }
 
+  def projectEuler29 = {
+    val l = for {
+      a <- 2 to 100
+      b <- 2 to 100
+    } yield math.pow(a, b)
+
+    l.distinct.length
+  }
+
   def projectEuler50 = {
 
     def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
@@ -621,7 +630,7 @@ object ProjectEuler {
 //    assert(projectEuler26 == 983)
 //    assert(projectEuler50 == 997651)
 //    assert(projectEuler27 == -59231)
-
-    assert(projectEuler28 == 669171001)
+//    assert(projectEuler28 == 669171001)
+    assert(projectEuler29 == 9183)
   }
 }
