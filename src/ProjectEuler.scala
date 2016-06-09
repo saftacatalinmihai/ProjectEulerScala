@@ -556,6 +556,16 @@ object ProjectEuler {
     a * b
   }
 
+  def projectEuler28 = {
+    lazy val seq: Stream[(Int, List[Int])] = (2, List(9,7,5,3)) #:: seq.map(t => {
+      val next_step = t._1 + 2
+      ( next_step,
+        (1 to 4).map(i => next_step * i + t._2.head).reverse.toList )
+    })
+
+    1 + seq.take((1001 - 1) / 2).map(_._2.sum).sum
+  }
+
   def projectEuler50 = {
 
     def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
@@ -610,9 +620,8 @@ object ProjectEuler {
 //    assert(projectEuler25 == 4782)
 //    assert(projectEuler26 == 983)
 //    assert(projectEuler50 == 997651)
-    time {
-      assert(projectEuler27 == -59231)
-    }
+//    assert(projectEuler27 == -59231)
 
+    assert(projectEuler28 == 669171001)
   }
 }
