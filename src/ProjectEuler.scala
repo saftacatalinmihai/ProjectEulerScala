@@ -575,6 +575,25 @@ object ProjectEuler {
     l.distinct.length
   }
 
+  def projectEuler30 = {
+    def pow_5_sum_eq_num (l: List[Int]): Boolean =
+      listToNumber(l) == l.foldLeft(0)((a, b) => a + Math.pow(b, 5).toInt)
+
+    def listToNumber(l: List[Int]): Int =
+      l.foldLeft((0 ,l.size - 1 )){
+        (acc, n) => {
+          val (sum, pow) = acc
+          (n * Math.pow(10, pow).toInt + sum, pow - 1)
+        }
+      }._1
+
+    (2 to 999999)
+      .map(_.toString.split("").toList.map(_.toInt))
+      .filter(pow_5_sum_eq_num)
+      .map(listToNumber)
+      .sum
+  }
+
   def projectEuler50 = {
 
     def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
@@ -631,6 +650,7 @@ object ProjectEuler {
 //    assert(projectEuler50 == 997651)
 //    assert(projectEuler27 == -59231)
 //    assert(projectEuler28 == 669171001)
-    assert(projectEuler29 == 9183)
+//    assert(projectEuler29 == 9183)
+//    assert(projectEuler30 == 443839)
   }
 }
