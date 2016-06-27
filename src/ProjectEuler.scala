@@ -594,6 +594,25 @@ object ProjectEuler {
       .sum
   }
 
+  def projectEuler42 = {
+    val words = scala.io.Source.fromFile("p042_words.txt").mkString.split(",").map(w => w.replaceAll("\"", "")).toList
+
+    def triangle(n: Int): Int = (0.5 * n * (n + 1)).toInt
+    lazy val triangleNums : Stream[Int] = Stream.from(1).map(triangle)
+
+    val alphabet = 'A' to 'Z'
+    val alphabetIndex = alphabet.zip(1 to alphabet.length).toMap
+    def alphabeticalValue(n: String) = {
+      n.toCharArray.map(alphabetIndex).sum
+    }
+
+    words.count {
+      w =>
+        val wordValue = alphabeticalValue(w)
+        triangleNums.takeWhile(_ <= wordValue).contains(wordValue)
+    }
+  }
+
   def projectEuler50 = {
 
     def isPrime(n: Int): Boolean = (2 until Math.sqrt(n).toInt) forall (n % _ != 0)
@@ -652,5 +671,6 @@ object ProjectEuler {
 //    assert(projectEuler28 == 669171001)
 //    assert(projectEuler29 == 9183)
 //    assert(projectEuler30 == 443839)
+    println(projectEuler42)
   }
 }
